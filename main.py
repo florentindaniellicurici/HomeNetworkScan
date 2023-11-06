@@ -1,8 +1,11 @@
 import scanet
 import networkdetails
 
-#networkdetails.networkdetails()
-dict = scanet.scan("192.168.1.0/28")
+
+yourip, networkip = networkdetails.networkdetails()
+print(networkip)
+dict = scanet.scan(networkip)
+
 
 
 

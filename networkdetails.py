@@ -6,7 +6,10 @@ def networkdetails():
     var2 = "Subnet Mask"
 
     ipconfcmd = os.popen("ipconfig").read()
+
     networklist = ipconfcmd.split("\n")
+
+    print(networklist)
 
     for i in networklist:
         if (var1 in i):
@@ -14,13 +17,14 @@ def networkdetails():
         elif (var2 in i):
             submask = i.split(":")[1]
 
-    print(ipadr)
-    print(submask)
-
     result = "{}/{}".format(ipadr.strip(),submask.strip())
-    print(result)
 
     network = ipaddress.IPv4Network(result, strict=False)
-    print(network.network_address)
+    netaddr = str(network.network_address)
+    postfix = ipaddress.IPv4Network('0.0.0.0/255.255.255.0').prefixlen
+
+    final_result = "{}/{}".format(netaddr,str(postfix))
+
+    return ipadr, final_result
 
 
