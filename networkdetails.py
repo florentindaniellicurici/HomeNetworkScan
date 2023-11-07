@@ -9,22 +9,17 @@ def networkdetails():
 
     networklist = ipconfcmd.split("\n")
 
-    print(networklist)
-
     for i in networklist:
         if (var1 in i):
-            ipadr = i.split(":")[1]
+            ipadr = i.split(":")[1].strip()
         elif (var2 in i):
-            submask = i.split(":")[1]
+            submask = i.split(":")[1].strip()
 
-    result = "{}/{}".format(ipadr.strip(),submask.strip())
-
+    result = "{}/{}".format(ipadr, submask)
     network = ipaddress.IPv4Network(result, strict=False)
     netaddr = str(network.network_address)
-    postfix = ipaddress.IPv4Network('0.0.0.0/255.255.255.0').prefixlen
+    postfix = ipaddress.IPv4Network("{}/{}".format(netaddr, submask)).prefixlen
 
-    final_result = "{}/{}".format(netaddr,str(postfix))
+    final_result = "{}/{}".format(netaddr, str(postfix))
 
     return ipadr, final_result
-
-
