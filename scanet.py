@@ -11,9 +11,10 @@ def scan(ip):
     print("IP\t\t MAC address")
 
     for element in ans:
-        print(element[1].psrc + "\t\t" + element[1].hwsrc)
         print("________________________________")
-        result[element[1].hwsrc] = [element[1].psrc]
+        print(element[1].psrc + "\t\t" + element[1].hwsrc)
+
+        result[element[1].hwsrc] = 1
 
     return result
 
